@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: dbpassword
+    ports:
+      - 5432:5432
+
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - db
+    ports:
+      - 8090:8000
+    

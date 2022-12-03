@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Union, List
 from datetime import datetime
 
 class TaskBase(BaseModel):
@@ -6,7 +7,7 @@ class TaskBase(BaseModel):
 
 class TaskCreate(TaskBase):
     owner_id: int
-    due: datetime | None
+    due: Union[datetime, None] = None
 
 class Task(TaskBase):
     id: int
@@ -25,7 +26,7 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     is_active: bool
-    tasks: list[Task] = []
+    tasks: List[Task] = []
 
     class Config:
         orm_mode = True
